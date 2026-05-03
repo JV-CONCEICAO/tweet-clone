@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-lg menu">
+    <div class="container">
+      <div class="navbar-nav">
+        <a class="menuItem" href="/timeline">Home</a>
+        <a class="menuItem" href="/sair">Sair</a>
+        <img src="/img/twitter_logo.png" class="menuIco" alt="Logo" />
+      </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row pt-4"> <!-- Adicionei apenas pt-4 aqui para afastar mais do menu fixo -->
+        
+        <!-- Coluna Esquerda: Perfil -->
+        <div class="col-md-3">
+            <div class="perfil">
+                <div class="perfilTopo"></div>
+                <div class="perfilPainel">
+                    <div class="row mt-2 mb-2">
+                        <div class="col mb-2">
+                            <span class="perfilPainelNome"><?= $_SESSION['nome'] ?></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2 text-center">
+                        <div class="col">
+                            <span class="perfilPainelItem">Tweets</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+                        <div class="col">
+                            <span class="perfilPainelItem">Seguindo</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+                        <div class="col">
+                            <span class="perfilPainelItem">Seguidores</span><br />
+                            <span class="perfilPainelItemValor">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Central: Feed -->
+        <div class="col-md-6">
+            <div class="row mb-3">
+                <div class="col tweetBox">
+                    <form method="post" action="/tweet">
+                        <textarea name="tweet" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="O que está acontecendo?"></textarea>
+                        <div class="col mt-3 d-flex justify-content-end pr-0">
+                            <button type="submit" class="btn btn-primary btn-tweet">Tweet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <?php foreach($this -> view -> tweets as $id_tweet => $dados) { ?>
+                <div class="row tweet">
+                    <div class="col">
+                        <p class="mb-1"><strong><?= $dados['nome'] ?></strong> <small> <span class="text-muted small"><?= $dados['data'] ?></span> </small></p>
+                        <p><?= $dados['tweet'] ?></p>
+                        <form>
+                            <div class="col d-flex justify-content-end p-0">
+                                <button type="submit" class="btn btn-danger btn-remover"><small>Remover</small></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <?php } ?>
+        </div> <!-- FECHAMENTO ADICIONADO AQUI -->
+        
+        <!-- Coluna Direita: Quem seguir -->
+        <div class="col-md-3">
+            <div class="quemSeguir">
+                <span class="quemSeguirTitulo">Quem seguir</span><br />
+                <hr class="my-2" />
+                <a href="#" class="quemSeguirTxt">Procurar por pessoas conhecidas</a>
+            </div>
+        </div>
+
+    </div>
+</div>
