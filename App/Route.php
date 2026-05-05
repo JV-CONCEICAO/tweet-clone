@@ -43,10 +43,22 @@
                 'action' => 'sair'
             );
 
+            $routes['quem_seguir'] = array(
+                'route' => '/quem_seguir',
+                'controller' => 'AppController',
+                'action' => 'quemSeguir'
+            );
+
             $routes['tweet'] = array(
                 'route' => '/tweet',
                 'controller' => 'AppController',
                 'action' => 'tweet'
+            );
+
+            $routes['acao'] = array(
+                'route' => '/acao',
+                'controller' => 'AppController',
+                'action' => 'acao'
             );
 
             $this -> setRoutes($routes);

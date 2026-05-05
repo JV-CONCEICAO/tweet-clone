@@ -41,6 +41,45 @@
                 return true;
             }
         }
+
+        public function quemSeguir(){
+            $this -> validaAutenticacao();
+
+            $pesquisarPor = isset($_GET['pesquisarPor']) ? $_GET['pesquisarPor'] : '';
+            
+            $usuarios = array();
+
+            if($pesquisarPor != '') {
+                $usuario = Container::getMOdel('Usuario');
+                $usuario -> __set('nome', $pesquisarPor);
+                $usuario -> __set('id', $_SESSION['id']);
+                $usuarios = $usuario -> getAll();
+            }
+            $this -> view -> usuarios = $usuarios;
+            $this -> render('quemSeguir');
+        }
+
+
+        public function acao() {
+            $this -> validaAutenticacao();
+            //acao
+            $acao = isset($_GET['acao'])? $_GET['acao']: '';
+            
+            //id_usuario a ser seguido
+            $id_user = isset($_GET['id_usuario']) ? $_GET['id_usuario']: '';
+
+            //Usuario que quer seguir : Usuario logado atualmente
+            $usuario = Container::getMOdel('Usuario');
+            $usuario -> __set('id', $_SESSION['id']);
+
+            if($acao == 'seguir') {
+                $usuario -> seguirUsuario($id_user);
+            } else if($acao == 'deixar_de_seguir') {
+                $usuario -> deixarSeguirUsuario($id_user);
+            }
+            $pesquisarPor = $_GET['pesquisarPor'];
+            header("Location: /quem_seguir?pesquisarPor=$pesquisarPor");
+        }
     }
 
 ?>
