@@ -96,6 +96,23 @@
             $pesquisarPor = $_GET['pesquisarPor'];
             header("Location: /quem_seguir?pesquisarPor=$pesquisarPor");
         }
+
+
+        public function deletarTweet(){
+            $this -> validaAutenticacao();
+
+            $id_tweet = isset($_GET['id_tweet_selecionado']) ? $_GET['id_tweet_selecionado'] : '';
+            $id_usuario = isset($_SESSION['id']) ? $_SESSION['id']: '';
+            if($id_tweet != '' and $id_usuario != '') {
+               $tweet = Container::getMOdel('Tweet');
+               $tweet -> __set('id', $id_tweet);
+               $tweet -> __set('id_usuario', $id_usuario) ;
+
+               $tweet -> DeletarTweet();
+            }
+
+            header('Location: /timeline');
+        }
     }
 
 ?>

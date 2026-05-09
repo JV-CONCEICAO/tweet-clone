@@ -52,6 +52,14 @@
 
             return $stmt -> fetchAll(\PDO::FETCH_ASSOC);
         }
+
+        public function DeletarTweet() {
+            $query = "DELETE FROM tweets WHERE id = :id and id_usuario = :id_user";
+            $stmt = $this -> db -> prepare($query);
+            $stmt -> bindValue(':id', $this -> id);
+            $stmt -> bindValue(':id_user', $this -> id_usuario);
+            return $stmt -> execute();
+        }
     }
 
 ?>

@@ -56,8 +56,10 @@
                         <p class="mb-1"><strong><?= $dados['nome'] ?></strong> <small> <span class="text-muted small"><?= $dados['data'] ?></span> </small></p>
                         <p><?= $dados['tweet'] ?></p>
                         <?php if($dados['id_usuario'] == $_SESSION['id']){ ?>
-                            <form>
+                            <form method="get" action="/deletarTweet">
                                 <div class="col d-flex justify-content-end p-0">
+                                    <input type="hidden" readonly name="id_tweet_selecionado" value="<?= $dados['id'] ?>">
+                                    <input type="hidden" readonly name="id_user" value="<?= $dados['id_usuario'] ?>">
                                     <button type="submit" class="btn btn-danger btn-remover"><small>Remover</small></button>
                                 </div>
                             </form>
@@ -65,6 +67,7 @@
                     </div>
                 </div>
             <?php } ?>
+
         </div> <!-- FECHAMENTO ADICIONADO AQUI -->
         
         <!-- Coluna Direita: Quem seguir -->
