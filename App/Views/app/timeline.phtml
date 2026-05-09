@@ -10,29 +10,27 @@
 
 <div class="container mt-5">
     <div class="row pt-4"> <!-- Adicionei apenas pt-4 aqui para afastar mais do menu fixo -->
-        
-        <!-- Coluna Esquerda: Perfil -->
         <div class="col-md-3">
             <div class="perfil">
                 <div class="perfilTopo"></div>
                 <div class="perfilPainel">
                     <div class="row mt-2 mb-2">
                         <div class="col mb-2">
-                            <span class="perfilPainelNome"><?= $_SESSION['nome'] ?></span>
+                            <span class="perfilPainelNome"><?= $this -> view -> infoUser['nome'] ?></span>
                         </div>
                     </div>
                     <div class="row mb-2 text-center">
                         <div class="col">
                             <span class="perfilPainelItem">Tweets</span><br />
-                            <span class="perfilPainelItemValor">0</span>
+                            <span class="perfilPainelItemValor"><?= $this -> view -> totalTweets['total'] ?></span>
                         </div>
                         <div class="col">
                             <span class="perfilPainelItem">Seguindo</span><br />
-                            <span class="perfilPainelItemValor">0</span>
+                            <span class="perfilPainelItemValor"><?= $this -> view -> totalSeguindo['total_seguindo'] ?></span>
                         </div>
                         <div class="col">
                             <span class="perfilPainelItem">Seguidores</span><br />
-                            <span class="perfilPainelItemValor">0</span>
+                            <span class="perfilPainelItemValor"><?= $this -> view -> totalSeguidores['total_seguidores'] ?></span>
                         </div>
                     </div>
                 </div>
@@ -57,11 +55,13 @@
                     <div class="col">
                         <p class="mb-1"><strong><?= $dados['nome'] ?></strong> <small> <span class="text-muted small"><?= $dados['data'] ?></span> </small></p>
                         <p><?= $dados['tweet'] ?></p>
-                        <form>
-                            <div class="col d-flex justify-content-end p-0">
-                                <button type="submit" class="btn btn-danger btn-remover"><small>Remover</small></button>
-                            </div>
-                        </form>
+                        <?php if($dados['id_usuario'] == $_SESSION['id']){ ?>
+                            <form>
+                                <div class="col d-flex justify-content-end p-0">
+                                    <button type="submit" class="btn btn-danger btn-remover"><small>Remover</small></button>
+                                </div>
+                            </form>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>

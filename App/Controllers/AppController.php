@@ -19,6 +19,14 @@
 
             $this -> view -> tweets = $tweets;
 
+            $usuario = Container::getMOdel('Usuario');
+            $usuario -> __set('id', $_SESSION['id']);
+
+            $this -> view -> infoUser = $usuario -> getInfoUser();
+            $this -> view -> totalTweets = $usuario -> getTotalTweet();
+            $this -> view -> totalSeguindo = $usuario -> getTotalSeguindo();
+            $this -> view -> totalSeguidores = $usuario -> getTotalSeguidores();
+
             $this -> render('timeline');
         }
 
@@ -55,6 +63,14 @@
                 $usuario -> __set('id', $_SESSION['id']);
                 $usuarios = $usuario -> getAll();
             }
+            $usuario = Container::getMOdel('Usuario');
+            $usuario -> __set('id', $_SESSION['id']);
+
+            $this -> view -> infoUser = $usuario -> getInfoUser();
+            $this -> view -> totalTweets = $usuario -> getTotalTweet();
+            $this -> view -> totalSeguindo = $usuario -> getTotalSeguindo();
+            $this -> view -> totalSeguidores = $usuario -> getTotalSeguidores();
+
             $this -> view -> usuarios = $usuarios;
             $this -> render('quemSeguir');
         }
